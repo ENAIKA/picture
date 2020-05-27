@@ -1,0 +1,27 @@
+{%extends 'all-pictures/base.html'%}
+
+ {% block content %}
+
+ <div class="container">
+
+   <div class="row">
+     <img src="{{photo.image}}"  class="img-responsive" alt="">
+   </div>
+
+   <div class="row">
+     <h1 class="text-center">{{photo.name}}</h1>
+     <img src="{{photo.image.url}}">
+   </div>
+
+   <div class="row">
+     <p>location: {{photo.loaction}}</p>
+     <p>Category: {{photo.category.title}}</p>
+   </div>
+
+   <div class="row">
+     <p>Uploaded: {{photo.upload_date|timesince}} </p>
+   </div>
+
+ </div>
+
+ {% endblock %}
