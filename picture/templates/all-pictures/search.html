@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
 
-  <div class="row">
+  <div class="row" style="font-family: 'Bungee Shade', cursive;">
     {% if photos%}
     <h2>Found {{ photos|length }} of search term {{message}}</h2>
     {% else %}
@@ -17,15 +17,17 @@
     {% for photo in photos %}
     <div class=" col-sm-4">
 
-      <div class="card">
+      <div class="card" >
 
         <div class="card-header">
-          <h2 class="text-center">{{photo.name}}</h2>
+          <h2 class="text-center" style="font-family: 'Bungee Inline', cursive;">{{photo.name}}</h2>
         </div>
         <div class="card-body">
-          <img src="{{photo.image.url}}" >
+          <a href="/photo/{{photo.id}}"><img name ='photo' src="{{photo.image.url}}" style="width: 320px;height: 240px;" ></a>
 
-          <a style="margin-left: 5px;" href="#" class="btn btn-primary"><i class="fas fa-share-alt"></i></a>
+          <i id="sharebtn" data-toggle="tooltip" title="copy link"data-clipboard-text="{{photo.image.url}}" class="fas fa-share-alt fa-3x" style="color:skyblue;padding-left: 2%;"></i>
+         <a data-toggle="tooltip" title="share on facebook"href="https://www.facebook.com/share.php?u=http://nakishgallery.herokuapp.com{{photo.image.url}}"> <i class="fab fa-facebook-square fa-3x" style="color: #3b5998;padding-left: 5%; " ></i></a>
+          
         </div>
       </div>
     </div>

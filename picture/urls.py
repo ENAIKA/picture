@@ -5,9 +5,12 @@ from django.conf.urls.static import static
 
 
 urlpatterns=[
-    url(r'^$',views.welcome,name = 'welcome'),
+    url(r'^$',views.welcome,name = "welcome"),
     url(r'^search/', views.search_results, name='search_results'),
-    url(r'^photo/(\d+)',views.photo,name ='photo')
+    url(r'^photo/(\d+)',views.photo,name ='photo'),
+    url(r"^copy/$", views.copy),
+    url(r'^photos/',views.allphotos,name ='photos'),
+
 
 ]
 if settings.DEBUG:

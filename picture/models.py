@@ -1,5 +1,6 @@
 from django.db import models
 import datetime as dt
+import pyperclip
 # Create your models here.
 
 class Location(models.Model):
@@ -41,7 +42,7 @@ class PhotoImage(models.Model):
     image = models.ImageField(upload_to = 'photos/')
     description= models.TextField( blank=True)
     upload_date = models.DateTimeField(auto_now_add=True)
-    location = models.ManyToManyField(Location)
+    location = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
 
 
@@ -63,7 +64,7 @@ class PhotoImage(models.Model):
 
     @classmethod
     def search_by_category(cls,category):
-        photos = PhotoImage.objects.filter(category__title__icontains=category)
+        photos = PhotoImage.objects.filter(category__title__icontains=category).order_by('location')
         return photos
 
     @classmethod
@@ -80,3 +81,10 @@ class PhotoImage(models.Model):
     def search_by_name(cls,search_term):
         photos = cls.objects.filter(name__icontains=search_term)
         return photos
+
+    @classmethod
+    def copy_photo(cls,image):
+        photo = cls.objects.get(image =image)
+        pyperclip.copy(photo.image.url)
+        copiedurl=pyperclip.paste()
+        return copiedurl

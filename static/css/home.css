@@ -17,7 +17,25 @@
     background-color: #555;
   }
 
-img{
-  width: 320px;
-  height: 240px;
+#welcome{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    opacity: 0.7;
+    transform: translate(-50%, -50%);  
+}
+
+#text{
+    position: relative;
+}
+#textInner {
+    animation:blinkingText 3s infinite;
+    animation-delay: 1s;
+}
+@keyframes blinkingText{
+    0%{     color: skyblue; }
+    49%{    color: skyblue; }
+    60%{    color: transparent; }
+    99%{    color: transparent;  }
+    100%{   color:skyblue;    }
 }

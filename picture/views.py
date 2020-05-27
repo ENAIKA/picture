@@ -3,11 +3,17 @@ import datetime as dt
 from django.http  import HttpResponse,Http404
 from django.db.models.base import ObjectDoesNotExist
 from .models import PhotoImage
-from PIL import ImageGrab
+
+# from PIL import ImageGrab
 # Create your views here.
 
 def welcome(request):
+    
     return render(request, 'home.html')
+
+def allphotos(request):
+    photos=PhotoImage.objects.all()
+    return render(request, 'pics.html', {"photos":photos})
 
 def search_results(request):
 
@@ -29,6 +35,13 @@ def photo(request,photo_id):
         raise Http404()
     return render(request,"all-pictures/photo.html", {"photo":photo})
 
-def copy():
-   img = ImageGrab.grabclipboard()
-   return img
+def copy(request,photo_image):
+#    img = ImageGrab.grabclipboard()
+#    return img
+    try:
+        
+        copiedurl = PhotoImage.copy_photo(image = photo_image)
+        
+    except ObjectDoesNotExist:
+        raise Http404()
+    return render(request,"copy.html", {"copy":copiedurl})

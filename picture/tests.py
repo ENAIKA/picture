@@ -1,5 +1,6 @@
 from django.test import TestCase
 from .models import PhotoImage,Category,Location
+import pyperclip
 # Create your tests here.
 
 class LocationTestClass(TestCase):
@@ -126,4 +127,33 @@ class PhotoImageTestClass(TestCase):
         self.photo.get_image_by_id(id=1)
         photo =PhotoImage.objects.all()
         self.assertTrue(len(photo) ==1)
-    
+class CopyTest(TestCase):
+     # Set up method
+    def setUp(self):
+        #creating a new photo and saving it
+        self.new_location=Location(location_name="Mozambique")
+        self.new_location.save_location()
+        
+        #creating a new category and saving it
+        self.new_category=Category(title="test")
+        self.new_category.save_category()
+
+        #creating a new photo and saving it
+        self.photo= PhotoImage(name = 'test1',image="imageurl",description="MozambiqueTest",category=self.new_category)
+        self.photo.save_photo()
+
+        self.photo.location.add(self.new_location)
+
+    def tearDown(self):
+            Category.objects.all().delete()
+            Location.objects.all().delete()
+            PhotoImage.objects.all().delete()
+
+    # Testing  instance
+    def test_instance(self):
+        self.assertTrue(isinstance(self.photo,PhotoImage))
+
+    # Testing Save Method
+    def test_copy_method(self):
+        new_copy=self.photo.copy_photo("imageurl")        
+        self.assertTrue(new_copy==self.photo.image.url)
