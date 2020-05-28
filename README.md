@@ -7,7 +7,7 @@
 * To run the website need a browser (for IE browsers version 9 and above is recommended.)
 
 #### To Contribute
-* Before starting the steps below: make sure to check (https://github.com/ENAIKA/PitchPerfect/blob/master/requirements.txt) and install the packages used in this app then:
+* Before starting the steps below: make sure to check [requirements.txt](https://github.com/ENAIKA/picture/blob/master/requirements.txt) and install the packages used in this app then:
 * Fork the repo
 * Create your branch 
 * Make the appropriate changes in the files
